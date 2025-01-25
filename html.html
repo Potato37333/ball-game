@@ -1,90 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ball Game</title>
-  <style>
-    body {
-      margin: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      background: linear-gradient(135deg, #89f7fe, #66a6ff);
-      overflow: hidden;
-    }
-
-    #gameArea {
-      position: relative;
-      width: 600px;
-      height: 400px;
-      background: white;
-      border: 2px solid #000;
-      overflow: hidden;
-    }
-
-    #ball {
-      position: absolute;
-      width: 30px;
-      height: 30px;
-      background: red;
-      border-radius: 50%;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-    }
-  </style>
+    <title>Ball Game</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div id="gameArea">
-    <div id="ball"></div>
-  </div>
-
-  <script>
-    const ball = document.getElementById("ball");
-    const gameArea = document.getElementById("gameArea");
-
-    // Ball position and speed
-    let ballX = gameArea.clientWidth / 2;
-    let ballY = gameArea.clientHeight / 2;
-    const ballSpeed = 5;
-
-    // Key states
-    const keys = { ArrowUp: false, ArrowDown: false, ArrowLeft: false, ArrowRight: false };
-
-    // Event listeners for key press
-    window.addEventListener("keydown", (e) => {
-      if (keys.hasOwnProperty(e.key)) keys[e.key] = true;
-    });
-
-    window.addEventListener("keyup", (e) => {
-      if (keys.hasOwnProperty(e.key)) keys[e.key] = false;
-    });
-
-    function updateBallPosition() {
-      if (keys.ArrowUp) ballY -= ballSpeed;
-      if (keys.ArrowDown) ballY += ballSpeed;
-      if (keys.ArrowLeft) ballX -= ballSpeed;
-      if (keys.ArrowRight) ballX += ballSpeed;
-
-      // Keep the ball within the game area
-      const ballRadius = ball.clientWidth / 2;
-      ballX = Math.max(ballRadius, Math.min(gameArea.clientWidth - ballRadius, ballX));
-      ballY = Math.max(ballRadius, Math.min(gameArea.clientHeight - ballRadius, ballY));
-
-      // Update ball position
-      ball.style.left = `${ballX}px`;
-      ball.style.top = `${ballY}px`;
-    }
-
-    // Game loop
-    function gameLoop() {
-      updateBallPosition();
-      requestAnimationFrame(gameLoop);
-    }
-
-    gameLoop();
-  </script>
+    <div id="game-container">
+        <div id="ball"></div>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>
